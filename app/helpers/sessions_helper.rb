@@ -1,6 +1,7 @@
 module SessionsHelper
 
   # Logs in the given user.
+  # @labels login
   def log_in(user)
     session[:user_id] = user.id
     # Guard against session replay attacks.
@@ -9,6 +10,7 @@ module SessionsHelper
   end
 
   # Remembers a user in a persistent session.
+  # @labels remember
   def remember(user)
     user.remember
     cookies.permanent.encrypted[:user_id] = user.id
@@ -17,6 +19,7 @@ module SessionsHelper
 
   # Returns the user corresponding to the remember token cookie.
   # @label provider.authentication
+  # @labels findcurrentuser
   def current_user
     if (user_id = session[:user_id])
       user = User.find_by(id: user_id)
@@ -48,6 +51,7 @@ module SessionsHelper
   end
 
   # Logs out the current user.
+  # @labels logout
   def log_out
     forget(current_user)
     reset_session
