@@ -85,6 +85,7 @@ class User < ApplicationRecord
   end
 
   # Returns a user's status feed.
+  # @labels micropost feed
   def feed
     following_ids = "SELECT followed_id FROM relationships
                      WHERE  follower_id = :user_id"
